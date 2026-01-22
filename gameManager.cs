@@ -57,6 +57,7 @@ public class gameManager : MonoBehaviour
         collectableScript.scoreUpdate += updateScore;
         enemyScript.scoreUpdate += updateScore;
         playerScript.died += endGame;
+        playerManager.playerSpawned += getPPos;
     }
 
     void OnDisable()
@@ -64,6 +65,7 @@ public class gameManager : MonoBehaviour
         collectableScript.scoreUpdate -= updateScore;
         enemyScript.scoreUpdate -= updateScore;
         playerScript.died -= endGame;
+        playerManager.playerSpawned -= getPPos;
     }
 
     void updateScore(int amount)
@@ -80,6 +82,10 @@ public class gameManager : MonoBehaviour
         gameStart?.Invoke();
         mainMenuUI.SetActive(false);
         gameUI.SetActive(true);
+    }
+    
+    void getPPos()
+    {
         GameObject[] temp = GameObject.FindGameObjectsWithTag("player");
         pPos = temp[0].transform;
     }
